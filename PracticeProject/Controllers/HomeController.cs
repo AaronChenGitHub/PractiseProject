@@ -13,6 +13,35 @@ namespace PracticeProject.Controllers
             _logger = logger;
         }
 
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Contact(string Name, string Email)
+        //{
+        //    return RedirectToAction(nameof(Index));
+        //}
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task< IActionResult> Contact(IFormCollection col)
+        {
+            List<String> Total = new List<string>();
+            foreach(string Key in col.Keys)
+            {
+                if (!Key.Contains("__RequestVerificationToken"))
+                { 
+                    string value = col[Key];
+                    Total.Add(value);
+                }
+            
+            }
+            Console.WriteLine(Total.Count);
+            return View(Total);
+        }
+
         public IActionResult Index()
         {
             return View();
