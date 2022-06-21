@@ -23,24 +23,34 @@ namespace PracticeProject.Controllers
         //{
         //    return RedirectToAction(nameof(Index));
         //}
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task< IActionResult> Contact(IFormCollection col)
+        public async Task<IActionResult> Contact(IFormCollection col)
         {
             List<String> Total = new List<string>();
-            foreach(string Key in col.Keys)
+            foreach (string Key in col.Keys)
             {
                 if (!Key.Contains("__RequestVerificationToken"))
-                { 
+                {
                     string value = col[Key];
                     Total.Add(value);
                 }
-            
+
             }
-            Console.WriteLine(Total.Count);
             return View(Total);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Contact(ContactViewModel viewModel)
+        //{
+        //   ViewBag.ContactName = viewModel.Name;
+        //   ViewBag.ContactEmail = viewModel.Email;
+
+
+        //    return View();
+        //}
 
         public IActionResult Index()
         {
